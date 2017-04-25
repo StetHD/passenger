@@ -454,6 +454,8 @@ module PhusionPassenger
           end
         elsif File.exist?(filename)
           return filename
+        elsif os_name_simple == "macosx"
+          select_executable(`brew --prefix`.strip+"/bin", "apr-1-config", "apr-config")
         else
           return nil
         end
@@ -480,6 +482,8 @@ module PhusionPassenger
           end
         elsif File.exist?(filename)
           return filename
+        elsif os_name_simple == "macosx"
+          select_executable(`brew --prefix`.strip+"/bin", "apu-1-config", "apu-config")
         else
           return nil
         end

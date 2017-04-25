@@ -103,7 +103,12 @@ define 'apr-dev' do
     emerge "apr"
   end
   on :macosx do
-    install_osx_command_line_tools
+    if `sw_vers -productVersion | cut -d '.' -f 2,3`.to_f >= 12
+      brew_install "apr"
+      brew_link "apr"
+    else
+      install_osx_command_line_tools
+    end
   end
 end
 
@@ -133,6 +138,11 @@ define 'apu-dev' do
     yum_install "apr-util-devel"
   end
   on :macosx do
-    install_osx_command_line_tools
+    if `sw_vers -productVersion | cut -d '.' -f 2,3`.to_f >= 12
+      brew_install "apr-util"
+      brew_link "apr-util"
+    else
+      install_osx_command_line_tools
+    end
   end
 end

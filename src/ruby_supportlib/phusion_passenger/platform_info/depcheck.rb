@@ -266,6 +266,10 @@ module PhusionPassenger
           install_instructions("Please install it with <b>brew install #{package_name}</b>")
         end
 
+        def brew_link(package_name)
+          install_instructions("Please link it with <b>brew link --force #{package_name}</b>")
+        end
+
         def install_osx_command_line_tools
           PhusionPassenger.require_passenger_lib 'platform_info/compiler'
           if PlatformInfo.xcode_select_version.to_s >= "2333"

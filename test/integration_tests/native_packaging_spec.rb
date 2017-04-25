@@ -54,7 +54,7 @@ require 'pathname'
 
 
 # Ensure that the natively installed tools are in PATH.
-ENV['PATH'] = "/usr/bin:/usr/sbin:#{ENV['PATH']}"
+ENV['PATH'] = "#{ENV['PATH']}:/usr/bin:/usr/sbin"
 # Force Rake to redirect stderr to stdout so that we can capture all output.
 ENV['STDERR_TO_STDOUT'] = '1'
 
@@ -359,7 +359,7 @@ describe "A natively packaged Phusion Passenger" do
           end
           Dir.mkdir("public")
           Dir.mkdir("tmp")
-          sh("passenger start --no-install-runtime -p 4000 -d >/dev/null")
+          sh("passenger start --engine builtin --no-install-runtime -p 4000 -d >/dev/null")
           begin
             open("http://127.0.0.1:4000/") do |f|
               f.read.should == "ok"
